@@ -1,0 +1,7 @@
+[Desktop Entry]
+Type=Application
+X-Nemo-Application-Type=silica-qt5
+X-Nemo-Single-Instance=no
+Icon=background-application-example
+Exec=background-application-example
+Name=Background Application
