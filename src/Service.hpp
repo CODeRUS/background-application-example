@@ -2,18 +2,18 @@
 #define SERVICE_HPP
 
 #include <QObject>
-#include <QQuickView>
-#include <sailfishapp.h>
 
-
+class QQuickView;
 class Service : public QObject
 {
     Q_OBJECT
     Q_CLASSINFO("D-Bus Interface", "example.background.application")
 public:
     explicit Service(QObject *parent = 0);
-    bool initialize();
-    void raise();
+    void initialize();
+
+    static bool isRegistered();
+    static bool raise();
 
 signals:
 
@@ -25,7 +25,11 @@ private slots:
     void onUiClosing();
 
 private:
-    QQuickView *m_view;
+    void showNotification();
+    void removeNotification();
+
+    QQuickView *m_view = nullptr;
+    quint32 m_notificationId = 0;
 };
 
 #endif // SERVICE_HPP

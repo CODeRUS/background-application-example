@@ -1,0 +1,7 @@
+[Unit]
+Description=Example
+
+[Service]
+Type=dbus
+ExecStart=/usr/bin/invoker -s --type=silica-qt5 /usr/bin/background-application-example activate
+BusName=example.background.application

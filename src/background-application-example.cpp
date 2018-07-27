@@ -3,19 +3,27 @@
 #include <QGuiApplication>
 #include <sailfishapp.h>
 
-const QString serviceName = QStringLiteral("example.background.application");
-
 int main(int argc, char *argv[])
 {
     QScopedPointer<QGuiApplication> app(SailfishApp::application(argc, argv));
-    app->setQuitOnLastWindowClosed(false);
 
-    Service service;
-    if (service.initialize()) {
-        service.showUi();
-        return app->exec();
+    if (app->arguments().last() == QStringLiteral("activate")) {
+        if (!Service::isRegistered()) {
+            app->setQuitOnLastWindowClosed(false);
+
+            Service service;
+            service.initialize();
+            service.showUi();
+
+            return app->exec();
+        } else {
+            return 1;
+        }
     } else {
-        service.raise();
-        return 0;
+        if (Service::raise()) {
+            return 0;
+        } else {
+            return 1;
+        }
     }
 }

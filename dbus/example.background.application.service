@@ -1,0 +1,5 @@
+[D-BUS Service]
+Name=example.background.application
+Interface=example.background.application
+Exec=/bin/false
+SystemdService=dbus-example.background.application.service
